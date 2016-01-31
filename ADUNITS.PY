@@ -1,11 +1,11 @@
+# Generates a csv file that can be imported into DFP to bulk create ad units
+# Ad unit codes are in this form: name_category_sizename e.g. ZineTitle_default_Leaderboard
 
 #-----
-code = 'HerWorld'
-title = 'HerWorld'
+code = 'ZineTitle'
+name = 'ZineTitle'
 sizes = 'Leaderboard_728x90 MediumRect_300x250 Skinner_1580x700 HalfPage_300x600'.split()
-categories = 'Default Fashion Beauty SexMarriage Lifestyle Parenting'.split()
-# Leaderboard_728x90 LargeLeader_970x90 MediumRect_300x250 Skinner_1580x700 HalfPage_300x600 
-# fashion beauty relationships-sex food travel
+categories = 'default fashion beauty relationships food travel'.split()
 #-----
 
 from collections import namedtuple
@@ -14,7 +14,7 @@ CSV_COLUMNNAMES = '#Code,Name,Sizes,Description,Enabled for AdSense,Border Color
 
 ROW_TEMPLATE = ','.join((
 	'{code}_{category}_{size.name}', # #Code
-	'{title} {category} {size.name}', # Name
+	'{name} {category} {size.name}', # Name
 	'{size.dims}', # Sizes
 	'', # Description
 	'no', # Enabled for AdSense
@@ -23,7 +23,7 @@ ROW_TEMPLATE = ','.join((
 	'', # Background Color
 	'', # Text Color
 	'', # URL Color
-	'{title} {category}', # Placements
+	'{name} {category}', # Placements
 	'_blank', # Target Window
 	'image', #Ad Type
 	'web', #Target Platform
@@ -36,7 +36,7 @@ def sizeNamedTuple(size):
 	return namedtuple('size', 'name dims')(*parts)
 
 sizes = [ sizeNamedTuple(size) for size in sizes ]
-csv_body = [ ROW_TEMPLATE.format(code=code, title=title, category=category, size=size) for category in categories for size in sizes ]
+csv_body = [ ROW_TEMPLATE.format(code=code, name=name, category=category, size=size) for category in categories for size in sizes ]
 csv_file = CSV_COLUMNNAMES + '\n' + '\n'.join(csv_body)
 
 with open('ADUNITS.CSV', 'w') as f:
