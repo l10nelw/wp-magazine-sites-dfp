@@ -1,4 +1,4 @@
-# Generates a csv file that can be imported into DFP to bulk create ad units
+# Generates a csv file that can be imported into DFP to bulk-create ad units
 # Ad unit codes are in this form: name_category_sizename e.g. ZineTitle_default_Leaderboard
 
 #-----
@@ -7,10 +7,13 @@ name = 'ZineTitle'
 sizes = 'Leaderboard_728x90 MediumRect_300x250 Skinner_1580x700 HalfPage_300x600'.split()
 categories = 'default fashion beauty relationships food travel'.split()
 #-----
+# Code and name normally can almost always be the same.
+# Ad unit codes are unique, so if you must recreate/reimport an ad unit you need a new code e.g. ZineTitle2.
 
 from collections import namedtuple
 
-CSV_COLUMNNAMES = '#Code,Name,Sizes,Description,Enabled for AdSense,Border Color,Title Color,Background Color,Text Color,URL Color,Placements,Target Window,Ad Type,Target Platform,Mobile Platform,Labels'
+CSV_COLUMNNAMES = '#Code,Name,Sizes,Description,Enabled for AdSense,Border Color,Title Color,Background Color,Text Color,URL Color,'\
+	'Placements,Target Window,Ad Type,Target Platform,Mobile Platform,Labels'
 
 ROW_TEMPLATE = ','.join((
 	'{code}_{category}_{size.name}', # #Code

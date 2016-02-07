@@ -3,6 +3,7 @@
 
 global $ADUNITS, $ADCODEHEAD, $ADCATS;
 
+// a full ad unit code looks like: /110430332/ZineTitle_fashion_HalfPage
 $ADCODEHEAD = '/110430332/ZineTitle';
 $ADCATS = explode(' ', 'fashion beauty relationships food travel'); // ad targetable categories
 
@@ -12,14 +13,13 @@ $ADUNITS['Leaderboard'] = ['width' =>  728, 'height' =>  90];
 $ADUNITS['MediumRect']  = ['width' =>  300, 'height' => 250];
 $ADUNITS['Skinner']     = ['width' => 1580, 'height' => 700];
 
-// note: a full ad unit code looks like: /110430332/ZineTitle_fashion_HalfPage
-
 // return category of current page if ad targetable, otherwise return 'default'
 function ad_category() {
 	if(is_home()) return 'default';
 	global $ADCATS;
-	foreach(get_the_category() as $cat)
+	foreach(get_the_category() as $cat) {
 		if(in_array($cat->slug, $ADCATS)) return $cat->slug;
+	}
 	return 'default';
 }
 
@@ -73,12 +73,12 @@ function ad_head() {
 		});
 	});
 	function skinner(){
-		document.body.style.backgroundImage="url('<? printf($skinnerurl, 'ad') ?>')";
-		document.body.style.backgroundRepeat="no-repeat";
-		document.body.style.backgroundPosition="50% 0px";
-		document.body.style.backgroundAttachment="fixed";
-		document.body.onclick=handleClick;
-		document.body.onmouseover=handleMouseOver;
+		document.body.style.backgroundImage = "url('<? printf($skinnerurl, 'ad') ?>')";
+		document.body.style.backgroundRepeat = "no-repeat";
+		document.body.style.backgroundPosition = "50% 0px";
+		document.body.style.backgroundAttachment = "fixed";
+		document.body.onclick = handleClick;
+		document.body.onmouseover = handleMouseOver;
 	}
 	function handleClick(e){
 		e = e || event;
@@ -87,8 +87,8 @@ function ad_head() {
 			window.open('<? printf($skinnerurl, 'jump') ?>','_blank');
 	}
 	function handleMouseOver(e){
-		e=e || event;
-		var target=e.srcElement || e.target;
+		e = e || event;
+		var target = e.srcElement || e.target;
 		document.body.style.cursor = (document.body == target) ? 'pointer' : 'default';
 	}
 	</script>
