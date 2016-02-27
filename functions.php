@@ -3,9 +3,9 @@
 
 global $ADUNITS, $ADCODEHEAD, $ADCATS;
 
-// a full ad unit code looks like: /110430332/ZineTitle_fashion_HalfPage
-$ADCODEHEAD = '/110430332/ZineTitle';
-$ADCATS = explode(' ', 'fashion beauty relationships food travel'); // ad targetable categories
+// a full ad unit code looks like: /123456789/Title_fashion_HalfPage
+$ADCODEHEAD = '/123456789/Title';
+$ADCATS = explode(' ', 'fashion beauty relationships food travel'); // ad-targetable categories (list of category slugs)
 
 // size names
 $ADUNITS['HalfPage']    = ['width' =>  300, 'height' => 600];
@@ -13,7 +13,7 @@ $ADUNITS['Leaderboard'] = ['width' =>  728, 'height' =>  90];
 $ADUNITS['MediumRect']  = ['width' =>  300, 'height' => 250];
 $ADUNITS['Skinner']     = ['width' => 1580, 'height' => 700];
 
-// return category of current page if ad targetable, otherwise return 'default'
+// return category slug of current page if ad-targetable, otherwise return 'default'
 function ad_category() {
 	if(is_home()) return 'default';
 	global $ADCATS;
